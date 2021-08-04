@@ -1,0 +1,25 @@
+div {
+    margin: 50px;
+}
+
+.social_inputs {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+textarea {
+    height: 60px;
+}
+
+.btn {
+    height: 50px;
+    cursor: pointer;
+}
+
+input {
+    height: 30px;
+}
+
