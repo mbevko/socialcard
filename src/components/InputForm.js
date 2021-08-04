@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './inputform.css'
+import './inputform.css';
 
 export default function InputForm() {
 
@@ -19,7 +19,15 @@ export default function InputForm() {
         setLinkedin] = useState();
 
     const [socialCard,
-        setSocialCard] = useState({name: '', description: '', twitter: '', instagram: '', linkedin: ''});
+        setSocialCard] = useState({
+        name: 'John Doe',
+        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui, molestiae molesti' +
+                'as! Dolor pariatur laborum voluptas alias repudiandae quisquam cum? Quidem cupid' +
+                'itate nesciunt voluptates odio amet nisi praesentium ipsa, eum et?',
+        twitter: '#',
+        instagram: '#',
+        linkedin: '#'
+    });
 
     const handleName = (e) => {
         setName(e.target.value)
@@ -41,15 +49,18 @@ export default function InputForm() {
         setLinkedin(e.target.value)
     }
 
+
     const handleSubmit = (e) => {
         e.preventDefault()
         setSocialCard({
             name: name,
             description: description,
-            twitter: twitter.legnth <= 1
-                ? ''
-                : twitter
-        })
+            twitter: twitter,
+            instagram: instagram,
+            linkedin: linkedin
+
+        });
+
         setDescription('')
         setName('')
         setTwitter('')
@@ -58,13 +69,13 @@ export default function InputForm() {
     }
 
     return (
-        <div>
+        <div className="app">
             <form className="social_inputs">
                 <input onChange={handleName} value={name} className='name' placeholder='Name'/>
                 <textarea
                     onChange={handleDescription}
                     value={description}
-                    placeholder='Description'
+                    placeholder='Bio'
                     className='description'/>
                 <input
                     onChange={handleTwitter}
@@ -85,11 +96,43 @@ export default function InputForm() {
                 <input type="submit" className="btn" onClick={handleSubmit}/>
             </form>
 
-            <div>
-                <h2>{socialCard.name}</h2>
-                <p>{socialCard.description}</p>
-                <p>{socialCard.twitter}</p>
+            <div className="social_card">
+                <div className="row">
+
+                    <div>
+                        <h2>{socialCard.name}</h2>
+                        <p>{socialCard.description}</p>
+                        <button>See more</button>
+                    </div>
+                    <div>
+                        <img src='https://images.unsplash.com/photo-1528721071427-cab7de8e8050?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'/>
+                    </div>
+
+                </div>
+                <div className="social_icons">
+                    {socialCard.twitter
+                        ? <a href={socialCard.twitter} alt="Twitter" title="Twitter">
+                                <i className="fab fa-twitter"></i>
+                            </a>
+                        : ''}
+                    {socialCard.instagram
+                        ? <a
+                                href={socialCard.instagram}
+                                alt="Instagram"
+                                title="Instagram"
+                                target="_blank">
+                                <i className="fab fa-instagram"></i>
+                            </a>
+                        : ''}
+                    {socialCard.linkedin
+                        ? <a href={socialCard.linkedin} alt="LinkedIn" title="LinkedIn" target="_blank">
+                                <i className="fab fa-linkedin-in"></i>
+                            </a>
+                        : ''}
+                </div>
             </div>
         </div>
     )
 }
+
+
